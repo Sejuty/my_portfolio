@@ -1,7 +1,8 @@
 import { defineConfig } from 'vite'
 
-// '/' for a user site (https://sejuty.github.io/).
-// For a project site (https://sejuty.github.io/<repo>/) change this to '/<repo>/'.
+// The site is served from the `my_portfolio` repo at https://sejuty.github.io/my_portfolio/,
+// so every asset URL needs that prefix. If you move it to a repo named `Sejuty.github.io`
+// (served at https://sejuty.github.io/), change this back to '/'.
 export default defineConfig({
-  base: '/',
+  base: '/my_portfolio/',
 })
