@@ -28,6 +28,8 @@ const BRACKET_X = 8 // role brackets run down the left edge
 const MIN_GAP_V = 26
 const MIN_GAP_V2 = 40 // when either neighbour has a two-line label
 
+const SWEEP = 2.4 // seconds the draw-in takes to cross the whole timeline
+
 type Side = 'above' | 'below' | 'left' | 'right'
 
 interface Station extends PathNode {
@@ -45,7 +47,7 @@ interface SpanItem extends PathSpan {
   main: SVGPathElement
   inner: SVGPathElement
   arrow: SVGPathElement
-  caps: [SVGCircleElement, SVGCircleElement]
+  caps: [SVGRectElement, SVGCircleElement] // start square, end junction
   txt: SVGTextElement
 }
 type Item = Station | SpanItem
@@ -53,7 +55,7 @@ interface TrackView {
   t: Track
   g: SVGGElement
   rail: SVGPathElement
-  cap: SVGCircleElement
+  cap: SVGRectElement
   arrow: SVGPathElement
   note: SVGTextElement
   name: SVGTextElement
@@ -69,6 +71,11 @@ function attrs(e: SVGElement, a: Record<string, string | number>) {
   for (const k in a) e.setAttribute(k, typeof a[k] === 'number' ? (a[k] as number).toFixed(1) : String(a[k]))
 }
 const f = (n: number) => n.toFixed(1)
+/** x/y that centre a square start marker on (cx, cy). */
+const centred = (r: SVGRectElement, cx: number, cy: number) => {
+  const h = r.width.baseVal.value / 2
+  return { x: cx - h, y: cy - h }
+}
 
 /** Distance along the time axis as a fraction (0–1), following the non-linear AXIS knots. */
 function warp(year: number) {
@@ -79,6 +86,12 @@ function warp(year: number) {
     if (year <= y1) return (p0 + ((year - y0) / (y1 - y0)) * (p1 - p0)) / total
   }
   return 1
+}
+
+/** Draw-in timing as CSS variables: --d is when the sweep reaches `from`, --t how long it takes to reach `to`. */
+function sweep(g: SVGElement, from: number, to?: number | null) {
+  g.style.setProperty('--d', `${(warp(from) * SWEEP).toFixed(2)}s`)
+  if (to !== undefined) g.style.setProperty('--t', `${(((to === null ? 1 : warp(to)) - warp(from)) * SWEEP).toFixed(2)}s`)
 }
 
 export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: string) {
@@ -96,7 +109,8 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
   const tracks = new Map<TrackId, TrackView>()
   for (const t of TRACKS) {
     const g = el('g', { class: `track ${t.kind}` })
-    const rail = el('path', { class: 'rail' }), cap = el('circle', { class: 'cap', r: 5 }), arrow = el('path', { class: 'arrow' })
+    sweep(g, t.from, t.to)
+    const rail = el('path', { class: 'rail', pathLength: 1 }), cap = el('rect', { class: 'cap', width: 8, height: 8 }), arrow = el('path', { class: 'arrow' })
     const note = el('text', { class: 'note' }), name = el('text', { class: 'track-name' })
     note.textContent = t.branch?.label ?? ''
     name.textContent = t.label
@@ -110,9 +124,10 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
   // ---- spans: the degree and the job roles ----
   const spans: SpanItem[] = SPANS.map(d => {
     const g = el('g', { class: `span ${d.kind}`, tabindex: 0, role: 'button', 'aria-label': `${d.label}, ${d.when}` })
-    const hit = el('path', { class: 'hit' }), main = el('path', { class: 'main' }), inner = el('path', { class: 'inner' })
+    sweep(g, d.from, d.to)
+    const hit = el('path', { class: 'hit' }), main = el('path', { class: 'main', pathLength: 1 }), inner = el('path', { class: 'inner', pathLength: 1 })
     const arrow = el('path', { class: 'arrow' }), txt = el('text')
-    const caps: [SVGCircleElement, SVGCircleElement] = [el('circle', { class: 'cap', r: 6 }), el('circle', { class: 'cap', r: 6 })]
+    const caps: [SVGRectElement, SVGCircleElement] = [el('rect', { class: 'cap', width: 11, height: 11 }), el('circle', { class: 'cap', r: 6 })]
     g.append(hit, main, inner, arrow, ...(d.kind === 'edu' ? caps : []), txt)
     gSpans.append(g)
     return { ...d, isSpan: true as const, el: g, hit, main, inner, arrow, caps, txt }
@@ -125,6 +140,7 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
     if (d.within && !spanById.has(d.within)) throw new Error(`Fig. 1: ${d.id} is within unknown span ${d.within}`)
     const kind = tracks.get(d.track)!.t.kind === 'eng' ? 'work' : 'research'
     const g = el('g', { class: `node ${kind}`, tabindex: 0, role: 'button', 'aria-label': `${d.label}, ${d.when}` })
+    sweep(g, d.year)
     const txt = el('text')
     g.append(
       el('circle', { class: 'hit', r: R + 10 }), // larger invisible touch target
@@ -283,7 +299,7 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
       } else {
         d = vertical ? `M${f(c)},${f(s)} V${f(e)}` : `M${f(s)},${f(c)} H${f(e)}`
         // on phones all research tracks share one column, so their separate start caps would just be noise
-        attrs(tv.cap, vertical ? { visibility: 'hidden' } : { visibility: 'visible', cx: s, cy: c })
+        attrs(tv.cap, vertical ? { visibility: 'hidden' } : { visibility: 'visible', ...centred(tv.cap, s, c) })
       }
       tv.rail.setAttribute('d', d)
       tv.arrow.setAttribute('d', t.to !== null ? '' : vertical
@@ -300,7 +316,7 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
       if (sp.kind === 'edu') {
         const c = [...tracks.values()].find(tv => tv.t.span === sp.id)!.cross
         d = vertical ? `M${f(c)},${f(s)} V${f(e)}` : `M${f(s)},${f(c)} H${f(e)}`
-        attrs(sp.caps[0], vertical ? { cx: c, cy: s } : { cx: s, cy: c })
+        attrs(sp.caps[0], vertical ? centred(sp.caps[0], c, s) : centred(sp.caps[0], s, c))
         attrs(sp.caps[1], vertical ? { cx: c, cy: e } : { cx: e, cy: c })
         const full = measure(sp.txt, sp.label)
         if (vertical) {
@@ -350,30 +366,11 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
 
   // ---------------------------------------------------------------- hover and selection
 
-  /** What lights up with an item: a station's track and role; a role's stations; the degree's branches. */
-  function related(item: Item) {
-    const near = new Set<Item>([item]), lines = new Set<TrackId>()
-    if (!item.isSpan) {
-      lines.add(item.track)
-      if (item.within) near.add(spanById.get(item.within)!)
-    } else if (item.kind === 'role') {
-      lines.add('eng')
-      for (const n of nodes) if (n.within === item.id) near.add(n)
-    } else {
-      // the degree: its own track plus every track that branches off it
-      const own = [...tracks.values()].find(tv => tv.t.span === item.id)?.t.id
-      for (const tv of tracks.values()) if (own && (tv.t.id === own || tv.t.branch?.from === own)) lines.add(tv.t.id)
-    }
-    return { near, lines }
-  }
-
-  /** Hover/keyboard focus: keep an item's own line, role and stations strong and fade the rest. */
+  /** Hover/keyboard focus: spotlight the item itself (and the selected one, so it stays legible) and fade the rest. */
   function focusOn(item: Item | null) {
     svg.classList.toggle('focus', !!item)
-    const rel = item ? related(item) : null
-    if (rel && selected) rel.near.add(selected) // the selected item stays legible while you explore others
-    for (const m of items) m.el.classList.toggle('dim', !!rel && !rel.near.has(m))
-    for (const tv of tracks.values()) tv.g.classList.toggle('dim', !!rel && !rel.lines.has(tv.t.id))
+    for (const m of items) m.el.classList.toggle('dim', !!item && m !== item && m !== selected)
+    for (const tv of tracks.values()) tv.g.classList.toggle('dim', !!item)
   }
 
   function select(item: Item, fromUser: boolean) {
@@ -405,6 +402,17 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
     // keyboard focus acts like hover; focus that comes from a click or tap doesn't
     g.addEventListener('focus', () => { if (g.matches(':focus-visible')) focusOn(item) })
     g.addEventListener('blur', () => focusOn(null))
+  }
+
+  // Draw-in: hidden (.intro) until the map first scrolls into view, then time sweeps across it once (.play).
+  if (!reduceMotion.matches && 'IntersectionObserver' in window) {
+    svg.classList.add('intro')
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return
+      io.disconnect()
+      svg.classList.replace('intro', 'play')
+    }, { threshold: 0.3 })
+    io.observe(svg)
   }
 
   new ResizeObserver(layout).observe(svg)

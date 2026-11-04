@@ -6,17 +6,38 @@
   --plate: #fbf5e4;
   --ink: #2a2116;
   --ink-soft: #5b4d38;
-  --ink-faint: #8f7f62;
+  --ink-faint: #6f6148; /* 5.1:1 on paper; small mono labels need 4.5:1 */
   --hairline: #d4c49f;
   --sepia: #7a4a22;
   --ochre: #c9a46a;
+  --shadow: rgba(60, 40, 10, .45);
+  --vignette: rgba(122, 74, 34, .16);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --display: 'Newsreader', Georgia, serif;
   --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
   --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
-  color-scheme: light; /* deliberate single theme: the page is a sheet of old paper */
+  color-scheme: light;
+}
+/* Dark: the same sheet read by lamplight. Ochre and sepia are pulled apart in lightness, not just hue,
+   so the engineering and research tracks stay distinct for colour-blind readers.
+   data-theme is set by the inline script in index.html (saved choice, else the OS setting). */
+:root[data-theme="dark"] {
+  --paper: #1b1611;
+  --paper-deep: #110d09;
+  --plate: #241d16;
+  --ink: #ede2c8;
+  --ink-soft: #c3b292;
+  --ink-faint: #9a8a6c;
+  --hairline: #3d3226;
+  --sepia: #c4703c;
+  --ochre: #e6cb8f;
+  --shadow: rgba(0, 0, 0, .7);
+  --vignette: rgba(0, 0, 0, .45);
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .85 0 0 0 0 .65 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: smooth; }
 body {
   margin: 0;
   color: var(--ink);
@@ -30,9 +51,7 @@ body::before {
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image:
-    radial-gradient(ellipse at 50% 40%, transparent 55%, rgba(122, 74, 34, .16) 100%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-image: radial-gradient(ellipse at 50% 40%, transparent 55%, var(--vignette) 100%), var(--grain);
 }
 img { max-width: 100%; }
 
@@ -47,11 +66,16 @@ header.top {
   padding-block: max(20px, env(safe-area-inset-top, 0px)) 20px; border-bottom: 1px solid var(--hairline);
   font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft);
 }
-header.top nav { display: flex; flex-wrap: wrap; gap: 4px 20px; }
+header.top nav { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-left: auto; }
+/* 16px icon in a 44px hit area; negative margins cancel the padding so the header's height and gaps are unchanged */
+#theme { align-self: center; color: inherit; background: none; border: 0; cursor: pointer; padding: 14px; margin: -16px -14px; }
+#theme:hover { color: var(--sepia); }
+#theme svg { display: block; width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.75; stroke-linecap: round; stroke-linejoin: round; }
+:root[data-theme="dark"] #theme .moon, :root:not([data-theme="dark"]) #theme .sun { display: none; }
 /* 44px hit area without changing the visual rhythm */
 header.top nav a { display: inline-block; padding-block: 16px; margin-block: -16px; }
 a { color: var(--sepia); text-underline-offset: 3px; }
-a:focus-visible, .node:focus-visible, .span:focus-visible { outline: 2px solid var(--sepia); outline-offset: 3px; }
+a:focus-visible, button:focus-visible, .node:focus-visible, .span:focus-visible { outline: 2px solid var(--sepia); outline-offset: 3px; }
 header.top a { color: inherit; text-decoration: none; }
 header.top a:hover { color: var(--sepia); }
 
@@ -74,7 +98,7 @@ h1 em { color: var(--sepia); }
 
 figure.plate {
   margin: 8px 0 0; background: var(--plate); border: 1px solid var(--hairline);
-  box-shadow: 0 1px 0 var(--paper-deep), 0 18px 40px -28px rgba(60, 40, 10, .45);
+  box-shadow: 0 1px 0 var(--paper-deep), 0 18px 40px -28px var(--shadow);
 }
 .plate-head {
   display: flex; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap;
@@ -108,9 +132,10 @@ figcaption b { font-family: var(--display); font-style: italic; font-weight: 600
 .track .rail { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
 .track.eng .rail { stroke: var(--ochre); }
 .track.research .rail { stroke: var(--sepia); }
-.track .cap { fill: var(--plate); stroke-width: 2.5; }
-.track.eng .cap { stroke: var(--ochre); }
-.track.research .cap { stroke: var(--sepia); }
+/* where a path starts: a small solid square, so it can't be mistaken for a project station */
+.track .cap { stroke: none; }
+.track.eng .cap { fill: var(--ochre); }
+.track.research .cap { fill: var(--sepia); }
 .track.eng .arrow { fill: var(--ochre); }
 .track.research .arrow { fill: var(--sepia); }
 .track .note { font: italic 13px var(--display); fill: var(--ink-soft); }
@@ -130,8 +155,10 @@ svg.focus .track.dim { opacity: .18; }
 .span.role .arrow { fill: var(--ink-soft); }
 .span.role text { font: 500 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-soft);
   paint-order: stroke; stroke: var(--plate); stroke-width: 6px; stroke-linejoin: round; pointer-events: none; }
+.span.edu rect.cap { fill: var(--ink); stroke: none; transition: fill .2s; }
 .span:hover .main, .span:hover .cap { stroke: var(--sepia); }
 .span.sel .main, .span.sel .cap { stroke: var(--sepia); }
+.span:hover rect.cap, .span.sel rect.cap { fill: var(--sepia); }
 .span.role.sel .main { stroke-width: 2.5; }
 .span.sel .arrow { fill: var(--sepia); }
 .span.sel text { fill: var(--sepia); font-weight: 600; }
@@ -162,9 +189,34 @@ svg.focus .span.dim { opacity: .22; }
 .node.sel.above text { transform: translateY(-6px); }
 .node.sel.left text { transform: translateX(-6px); }
 .node.sel.right text { transform: translateX(6px); }
-@keyframes halo-pulse { 0%, 100% { transform: scale(1); stroke-opacity: .35; } 50% { transform: scale(1.18); stroke-opacity: .12; } }
+/* transform and opacity only, so the GPU runs it: pulsing stroke-opacity cost ~8% of the main thread, forever */
+@keyframes halo-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: .35; } }
 @keyframes ring-turn { to { transform: rotate(360deg); } }
 svg.focus .node.dim circle.dot, svg.focus .node.dim text { opacity: .2; }
+
+/* Draw-in: map.ts adds .intro, then swaps it for .play once the map is in view; --d and --t (delay, duration)
+   come from each item's years. With pathLength=1 a single dash is the whole line, so sliding its offset
+   from 1 to 0 draws the line in. `backwards` holds the hidden state during each delay. */
+.rail, .span .main, .span .inner { stroke-dasharray: 1; }
+#map.intro :is(.rail, .span .main, .span .inner) { stroke-dashoffset: 1; }
+#map.intro :is(.node, .track .cap, .track .arrow, .track .note, .span .cap, .span .arrow, .span text) { opacity: 0; }
+#map.play :is(.rail, .span .main, .span .inner) { animation: draw var(--t) linear var(--d) backwards; }
+#map.play :is(.node, .track .cap, .track .note, .span .cap, .span text) { animation: appear .4s ease-out var(--d) backwards; }
+#map.play :is(.track .arrow, .span .arrow, .span .cap ~ .cap) { animation: appear .4s ease-out calc(var(--d) + var(--t)) backwards; }
+#map.play .node circle.dot { animation: grow .45s cubic-bezier(.3, 1.6, .6, 1) var(--d) backwards; }
+@keyframes draw { from { stroke-dashoffset: 1; } }
+@keyframes appear { from { opacity: 0; } }
+@keyframes grow { from { transform: scale(0); } }
+
+/* Sections below the fold fade up the first time they scroll into view (main.ts adds .reveal, then .shown). */
+/* the transition lives on .shown only, so hiding is instant and only the fade-in animates */
+.reveal { opacity: 0; transform: translateY(14px); }
+.reveal.shown { opacity: 1; transform: none; transition: opacity .6s ease-out, transform .6s ease-out; }
+
+/* Theme switch: the page cross-fades (View Transitions; browsers without it switch instantly) and the icon turns in. */
+::view-transition-old(root), ::view-transition-new(root) { animation-duration: .45s; }
+#theme.turned svg { animation: icon-turn .45s ease-out; }
+@keyframes icon-turn { from { transform: rotate(-90deg) scale(.5); opacity: 0; } }
 
 section.sec { padding-top: 56px; scroll-margin-top: 8px; }
 section.sec.sec-wide { max-width: none; }
@@ -175,7 +227,7 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
 .pubs .venue { font-style: italic; }
 /* Skills & certificates: set like a book index — mono label, dotted leader, then items run on with sepia middle dots. */
 .index { --label: 250px; margin: 0; display: grid; gap: 18px; }
-.index-wide { --label: 270px; }
+.index-wide { --label: 310px; } /* fits "DATACAMP · INFRASTRUCTURE · 2026" plus its leader */
 .index > div { display: grid; grid-template-columns: var(--label) minmax(0, 1fr); align-items: baseline; }
 .index dt {
   display: flex; align-items: baseline; gap: 10px; padding-right: 14px;
@@ -219,6 +271,8 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
 
 /* Phones: the index label sits above its items and the leader goes away. */
 @media (max-width: 600px) {
+  /* header: name and theme button share the first line, the section links wrap below */
+  header.top nav { order: 1; margin-left: 0; }
   .index { gap: 16px; }
   .index > div { grid-template-columns: minmax(0, 1fr); }
   .index dt { margin-bottom: 2px; padding-right: 0; }
