@@ -464,7 +464,7 @@ export function initMap(svg: SVGSVGElement, detail: HTMLElement, initialId?: str
           d = open ? `M${f(x + 6)},${f(s)} H${f(x)} V${f(e)}` : `M${f(x + 6)},${f(s)} H${f(x)} V${f(e)} H${f(x + 6)}`
           sp.arrow.setAttribute('d', open ? `M${f(x - 4)},${f(e)} L${f(x)},${f(e + 9)} L${f(x + 4)},${f(e)} Z` : '')
           sp.txt.textContent = sp.short ?? sp.label
-          attrs(sp.txt, { x: x + 10, y: s + 4, 'text-anchor': 'start' })
+          attrs(sp.txt, { x: x + 10, y: s - 5, 'text-anchor': 'start' }) // just above the bracket's start, clear of its first project
         } else {
           const y = engCross - ROLE_RISE
           d = open ? `M${f(s)},${f(y + 6)} V${f(y)} H${f(e)}` : `M${f(s)},${f(y + 6)} V${f(y)} H${f(e)} V${f(y + 6)}`

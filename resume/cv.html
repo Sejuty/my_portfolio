@@ -1,0 +1,149 @@
+<!doctype html>
+<!-- Résumé source. Rebuild public/cv.pdf with `npm run cv` (headless Chrome prints this page to PDF).
+     Set in Computer Modern to match the earlier LaTeX version. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Nishat Tafannum — Résumé</title>
+<style>
+  /* the CDN package's own @font-face rules use an invalid font-style, so they're declared here */
+  @font-face { font-family: 'CMU Serif'; font-weight: 400; font-style: normal; src: url('https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/fonts/cmu-serif-500-roman.woff2') format('woff2'); }
+  @font-face { font-family: 'CMU Serif'; font-weight: 400; font-style: italic; src: url('https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/fonts/cmu-serif-500-italic.woff2') format('woff2'); }
+  @font-face { font-family: 'CMU Serif'; font-weight: 700; font-style: normal; src: url('https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/fonts/cmu-serif-700-roman.woff2') format('woff2'); }
+  @font-face { font-family: 'CMU Serif'; font-weight: 700; font-style: italic; src: url('https://cdn.jsdelivr.net/npm/computer-modern@0.1.2/fonts/cmu-serif-700-italic.woff2') format('woff2'); }
+
+  @page { size: letter; margin: 0.42in 0.6in 0.5in; }
+  :root { --navy: #2b4c7e; --grey: #6b6b6b; }
+  * { box-sizing: border-box; }
+  body { margin: 0; hyphens: auto; -webkit-hyphens: auto; font: 10pt/1.32 'CMU Serif', 'Latin Modern Roman', Georgia, serif; color: #111; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  a { color: var(--navy); text-decoration: none; }
+
+  header { text-align: center; margin-bottom: 9pt; }
+  h1 { font-size: 21pt; font-weight: 700; letter-spacing: .03em; color: var(--navy); margin: 0 0 3pt; }
+  /* wraps between items, never inside one (an unbreakable line would make Chrome shrink the whole page) */
+  .contact { color: var(--grey); font-size: 9.4pt; display: flex; flex-wrap: wrap; justify-content: center; }
+  .contact span { white-space: nowrap; }
+  .contact span + span::before { content: '|'; margin: 0 .55em; color: var(--grey); }
+
+  .summary { text-align: justify; margin: 0 0 6pt; }
+  h2 { font-size: 12pt; font-weight: 700; color: var(--navy); border-bottom: .8pt solid var(--navy); padding-bottom: 1pt; margin: 9pt 0 5pt; }
+
+  .skills p { margin: 0; }
+  .entry { margin-bottom: 7pt; break-inside: avoid; }
+  .entry.long { break-inside: auto; }
+  .head { display: flex; justify-content: space-between; align-items: baseline; gap: 12pt; }
+  .head b { font-weight: 700; }
+  .dates { font-style: italic; color: var(--grey); white-space: nowrap; }
+  .sub { font-style: italic; color: var(--grey); font-size: 9pt; }
+  ul { margin: 2pt 0 0; padding-left: 15pt; }
+  li { margin: 0 0 1pt; text-align: justify; }
+  li::marker { font-size: 9pt; }
+</style>
+</head>
+<body>
+<header>
+  <h1>NISHAT TAFANNUM</h1>
+  <div class="contact"><span>Dhaka, Bangladesh</span><span><a href="mailto:sejuty87@gmail.com">sejuty87@gmail.com</a></span><span>+880 1991954786</span><span><a href="https://linkedin.com/in/nishat-tafannum">linkedin.com/in/nishat-tafannum</a></span><span><a href="https://github.com/Sejuty">github.com/Sejuty</a></span><span><a href="https://sejuty.github.io/my_portfolio/">sejuty.github.io/my_portfolio</a></span></div>
+</header>
+
+<p class="summary">Front-End Engineer (Software Engineer L-2) with 3+ years building responsive, high-performance web applications with React.js, Next.js and TypeScript for AdTech, FinTech and B2B SaaS clients. Leads design systems and shared component libraries used across multiple platforms, backed by automated quality checks and an AI-assisted (Claude Code) delivery workflow. Works directly with international clients and teams in fully remote settings.</p>
+
+<h2>Technical Skills</h2>
+<div class="skills">
+  <p><b>Languages:</b> JavaScript (ES6+), TypeScript, HTML5, CSS3, PHP (Laravel)</p>
+  <p><b>Frontend:</b> React.js, Next.js, Tailwind CSS, Sass, Ant Design, shadcn/ui</p>
+  <p><b>State &amp; Data:</b> Redux Toolkit, RTK Query, React Query</p>
+  <p><b>Charts:</b> ApexCharts, Highcharts</p>
+  <p><b>Forms &amp; Validation:</b> Zod, Formik, JSON Schema (Ajv)</p>
+  <p><b>Build &amp; Release:</b> Vite, Bun, Webpack, tsup, GitLab CI, private npm registry</p>
+  <p><b>Quality:</b> ESLint, Biome, WCAG AA accessibility</p>
+  <p><b>Architecture:</b> Design Systems, Component Libraries, Micro-Frontend, RBAC</p>
+  <p><b>Auth:</b> NextAuth.js, Keycloak</p>
+  <p><b>Dev Tools:</b> Git, Docker, Claude Code</p>
+</div>
+
+<h2>Professional Experience</h2>
+<div class="entry">
+  <div class="head"><span><b>Software Engineer L-2</b> — Vivasoft Limited</span><span class="dates">Mar 2026 – Present</span></div>
+  <div class="sub">Dhaka, Bangladesh · Promoted from L-1 after two years · Remote client delivery for international teams</div>
+  <ul>
+    <li>Lead the front-end modernization of Azerion’s Improve Digital ad tech platforms (Console, Publisher, Marketplace)</li>
+    <li>Lead shared component libraries, design systems and build-tool migrations across client projects</li>
+    <li>Review code, mentor junior developers, and work directly with client teams to clarify requirements and turn feedback into shipped features</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>Software Engineer L-1</b> — Vivasoft Limited</span><span class="dates">Mar 2024 – Feb 2026</span></div>
+  <div class="sub">Dhaka, Bangladesh · Remote client delivery for international teams</div>
+  <ul>
+    <li>Delivered React, Next.js and TypeScript applications for international AdTech and FinTech clients</li>
+    <li>Implemented complex frontend patterns including RBAC, multi-step workflows and interactive data visualizations</li>
+    <li>Improved component rendering performance by 25% through targeted refactoring and optimization</li>
+    <li>Led the front-end team of 2 junior developers on NetCapital from Sep 2025</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>Associate Software Engineer</b> — Vivasoft Limited</span><span class="dates">Feb 2023 – Jul 2023</span></div>
+  <div class="sub">Dhaka, Bangladesh · Left to complete the final year of my B.Sc.</div>
+  <ul>
+    <li>Built reusable React UI components, contributing to roughly 60% of a platform’s shared component library and improving design consistency across the product</li>
+    <li>Contributed to performance optimizations and participated in code reviews to maintain code quality and troubleshoot front-end issues</li>
+  </ul>
+</div>
+
+<h2>Selected Projects</h2>
+<div class="entry long">
+  <div class="head"><span><b>Improve Digital – Console, Publisher &amp; Marketplace (Client: Azerion)</b></span><span class="dates">Apr 2026 – Present</span></div>
+  <div class="sub">Tech Stack: React, TypeScript, Vite, Bun, Tailwind CSS, Ant Design, ApexCharts, Laravel/PHP, jQuery, GitLab CI, tsup, Biome</div>
+  <ul>
+    <li>Led front-end modernization of the Console: migrated Webpack/Laravel Mix to Vite and npm/Yarn to Bun, cutting build time by 75%, and moved the styling layer from Bootstrap to a prefixed Tailwind CSS system across 2 platforms</li>
+    <li>Authored 49 shared React building blocks (26 components, 7 hooks, 12 utilities, 4 chart wrappers) reused across Console modules, including a React data table that replaced jQuery DataTables in 15+ modules over 3 phased releases; delivered 31 tickets while cutting the codebase by a net ~7k lines</li>
+    <li>Made the design tokens enforce themselves in code: one token file feeds Tailwind and Ant Design, replacing 40 hard-coded colour copies and 115 ad-hoc font sizes, with 13 automated WCAG AA (4.5:1) contrast and style-drift tests; resolved a 27-issue cross-product UI audit with a 49-file icon codemod and a 4px spacing grid</li>
+    <li>Initiated and still lead a shared UI component library (Bun monorepo, tsup, GitLab CI, private npm registry) so 3 platforms (Console, Publisher, Marketplace) share one implementation; its sidebar package replaced each platform’s own navigation code in 3 releases, with shared peer dependencies, clash-free prefixed Tailwind and tag-triggered per-package releases</li>
+    <li>Built shared authentication packages: 6 base components and 4 complete auth flows (login, forgot password, set password, email verification), kept independent of any backend so each platform supplies only its own submit logic</li>
+    <li>Created and maintain the documented internal-tools design system: 7 page archetypes (each with a guide, live example and JSON Schema page spec), 8 reference components and dark/light themes, shipped through 18 versioned releases in 2 weeks; packaged it as a Claude Code skill that lints page specs (15 automated tests) and sits in an AI-assisted delivery pipeline with ticket automation, a UI-recording agent and git hooks that keep docs in sync</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>NetCapital – Invoice Financing Platform (Azerion, in-house)</b></span><span class="dates">Aug 2025 – Mar 2026</span></div>
+  <div class="sub">Tech Stack: Next.js 15, TypeScript, RTK Query, Highcharts, NextAuth.js, Keycloak, shadcn/ui, Tailwind CSS</div>
+  <ul>
+    <li>Developed and maintained the frontend architecture for Azerion’s in-house, multi-tenant financial operations platform, covering complex workflows such as the financing order lifecycle, application approval, multi-account management, and settlement</li>
+    <li>Built reusable components and custom hooks to support user and organization management, including onboarding, role assignment, and platform-wide user integration across merchants, buyers, and financing providers</li>
+    <li>Translated complex business logic, including double-entry accounting, fee structures, transaction traceability, and financial product configuration, into intuitive, type-safe interfaces supporting multiple financing products such as invoice factoring, loans, and trade finance</li>
+    <li>Collaborated closely with backend teams to ensure accurate frontend representation of financing, billing, and settlement flows, delivering a scalable interface for merchants, factors, and internal teams handling high-value transactions</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>PiHR – HR &amp; Payroll SaaS</b></span><span class="dates">May 2024 – Oct 2024</span></div>
+  <div class="sub">Tech Stack: Next.js, TypeScript, RTK Query, Zod, Micro-Frontend, Tailwind CSS</div>
+  <ul>
+    <li>Integrated 60+ reports across HR modules using a micro-frontend architecture with shared component libraries</li>
+    <li>Implemented schema-based form validation, ensuring consistent UX and data integrity across all modules</li>
+    <li>Engineered multilingual support for English, Bangla, and Arabic across forms and reports, including RTL layout handling and text rendering for Arabic without breaking existing LTR views</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>VivaKits – React Component Library (npm)</b></span><span class="dates">Mar 2024 – Jun 2024</span></div>
+  <div class="sub">Tech Stack: React.js, TypeScript, Tailwind CSS</div>
+  <ul>
+    <li>Published reusable, accessibility-compliant UI components (Input, Select, OTP, Skeleton, Switch) with full API documentation</li>
+    <li>Package published on npm: <a href="https://www.npmjs.com/package/vivakit">npmjs.com/package/vivakit</a></li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="head"><span><b>Klikit – Restaurant &amp; Food Delivery Management Platform</b></span><span class="dates">Feb 2023 – Jul 2023</span></div>
+  <div class="sub">Tech Stack: React.js, Formik, Service Workers</div>
+  <ul>
+    <li>Engineered the core Menu v2 feature, implementing an interactive visual representation of available time slots for restaurant service scheduling</li>
+    <li>Enhanced application performance through service worker implementation, ensuring cross-device compatibility</li>
+  </ul>
+</div>
+
+<h2>Education</h2>
+<div class="entry">
+  <div class="head"><b>B.Sc. in Software Engineering</b></div>
+  <div>Shahjalal University of Science and Technology, Bangladesh <span style="color:var(--grey);margin:0 .4em">|</span> 2019 – 2024</div>
+</div>
+</body>
+</html>

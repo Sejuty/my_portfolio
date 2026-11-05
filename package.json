@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "cv": "google-chrome --headless=new --no-pdf-header-footer --virtual-time-budget=10000 --print-to-pdf=public/cv.pdf \"file://$PWD/resume/cv.html\""
   },
   "devDependencies": {
     "typescript": "~6.0.3",
