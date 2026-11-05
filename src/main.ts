@@ -1,9 +1,12 @@
 import './styles.css'
 import { initMap } from './map'
+import { initScroll } from './scroll'
 
 const svg = document.querySelector<SVGSVGElement>('#map')
 const detail = document.querySelector<HTMLElement>('#detail')
 if (svg && detail) initMap(svg, detail)
+const scroll = document.querySelector<HTMLElement>('.scroll')
+if (scroll) initScroll(scroll)
 
 const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)')
 

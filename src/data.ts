@@ -45,15 +45,17 @@ export interface PathNode extends Detail {
   year: number
   /** Id of the role span this project was done in. */
   within?: string
+  /** A smaller project: drawn as a minor stop, labelled only where there's room (else on hover or selection). */
+  minor?: boolean
 }
 
 /** Listed top to bottom as they appear on wide screens. */
 export const TRACKS: Track[] = [
-  { id: 'auth', label: 'Authorship', kind: 'research', from: 2026.3, to: null },
-  { id: 'multi', label: 'Multimodal', kind: 'research', from: 2025.95, to: null },
-  { id: 'bias', label: 'Bias & fairness', kind: 'research', from: 2024.0, to: null, branch: { from: 'edu', label: 'thesis' } },
-  { id: 'edu', label: 'Education', kind: 'edu', from: 2018.6, to: 2024.0, span: 'bsc' },
   { id: 'eng', label: 'Engineering', kind: 'eng', from: 2023.08, to: null, branch: { from: 'edu', label: 'first job' } },
+  { id: 'edu', label: 'Education', kind: 'edu', from: 2018.6, to: 2024.0, span: 'bsc' },
+  { id: 'bias', label: 'Bias & fairness', kind: 'research', from: 2024.0, to: null, branch: { from: 'edu', label: 'thesis' } },
+  { id: 'multi', label: 'Multimodal', kind: 'research', from: 2025.95, to: null },
+  { id: 'auth', label: 'Authorship', kind: 'research', from: 2026.3, to: null },
 ]
 
 export const SPANS: PathSpan[] = [
@@ -75,12 +77,16 @@ export const SPANS: PathSpan[] = [
 ]
 
 export const NODES: PathNode[] = [
-  { id: 'klikit', track: 'eng', year: 2023.3, within: 'assoc', label: 'Klikit Menu v2', short: 'Klikit', when: 'Project · Vivasoft (Associate SE) · 2023',
-    text: 'The Menu v2 feature for Klikit, a restaurant management platform.',
+  { id: 'klikit', track: 'eng', year: 2023.3, within: 'assoc', label: 'Klikit', when: 'Project · Vivasoft (Associate SE) · 2023',
+    text: 'A restaurant management platform, where I built the Menu v2 feature.',
     pts: ['Built an interactive view of a restaurant’s service time slots',
       'Used service workers to keep it fast across devices'] },
+  { id: 'weselect', track: 'eng', year: 2024.2, within: 'l1', minor: true, label: 'WeSelect', when: 'Project · Vivasoft (SE L-1) · 2024',
+    text: 'A campaign and data analysis application.',
+    pts: ['Built the applicant tracking (ATS), campaign, company and user features',
+      'Built with Next.js, Tailwind CSS and RTK Query'] },
   { id: 'vivakits', track: 'eng', year: 2024.35, within: 'l1', label: 'VivaKits', when: 'Project · Vivasoft (SE L-1) · Mar–Jun 2024',
-    text: 'An open-source React component library, published on npm as vivakit.',
+    text: 'An open-source React component library, started for PiHR alongside it and published on npm as vivakit.',
     pts: ['Designed and published accessibility-compliant components: Input, Select, OTP, Skeleton and Switch',
       'Wrote full API documentation so other teams could adopt the components directly',
       'Built with React, TypeScript and Tailwind CSS'] },
@@ -89,8 +95,28 @@ export const NODES: PathNode[] = [
     pts: ['Integrated more than 60 reports across HR modules using a micro-frontend architecture with shared component libraries',
       'Built schema-based form validation, keeping data integrity consistent across modules',
       'Built English, Bangla and Arabic support, including right-to-left layouts that leave left-to-right views intact'] },
+  { id: 'circle', track: 'eng', year: 2024.71, within: 'l1', minor: true, label: 'Circle', when: 'Project · Vivasoft (SE L-1) · Jul–Nov 2024',
+    text: 'A location-based social media platform built around collections.',
+    pts: ['Built account management, including the account deletion flow',
+      'Built the support, policy and child-safety pages, and a report-account form with validation',
+      'Built with Next.js and Tailwind CSS'] },
+  { id: 'piutil', track: 'eng', year: 2024.96, within: 'l1', minor: true, label: 'Pi-Utilities', when: 'Project · Vivasoft (SE L-1) · Nov 2024–Feb 2025',
+    text: 'An office management system for meal services and workplace allocation.',
+    pts: ['Refactored the meal management module, improving rendering performance by 25%',
+      'Built a floor management module with Leaflet.js covering building locations, floorplans and seating',
+      'Made seats and workspaces assignable directly on an interactive floorplan'] },
+  { id: 'kothon', track: 'eng', year: 2025.25, within: 'l1', minor: true, label: 'Kothon AI', when: 'Project · Vivasoft (SE L-1) · Mar–Apr 2025',
+    text: 'A platform that analyses customer service calls, detecting agent and customer sentiment from the recordings.',
+    pts: ['Built a secure multi-file upload to AWS S3 that takes 100+ call recordings at once',
+      'Built sentiment dashboards in Highcharts so managers can spot trends and training needs',
+      'Built customizable PDF reports of sentiment metrics and call summaries with react-pdf'] },
+  { id: 'xsolla', track: 'eng', year: 2025.37, within: 'l1', minor: true, label: 'Xsolla', when: 'Project · Vivasoft (SE L-1) · May 2025',
+    text: 'Web pages for Xsolla, a global platform for game monetization and distribution.',
+    pts: ['Built responsive, pixel-perfect pages from high-fidelity designs',
+      'Integrated the Strapi CMS so pages are driven by content editors',
+      'Helped supervise releases for smooth deployments and quick fixes'] },
   { id: 'netcap', track: 'eng', year: 2025.65, within: 'l1', label: 'NetCapital', when: 'Project · Vivasoft (SE L-1) · Aug 2025–Mar 2026',
-    text: 'Front-end architecture for a multi-tenant invoice financing platform. I led the front-end team of 2 junior developers from Sep 2025.',
+    text: 'Front-end architecture for NetCapital, Azerion’s in-house multi-tenant invoice financing platform. I led the front-end team of 2 junior developers from Sep 2025.',
     pts: ['Built the financing order lifecycle, application approval, multi-account management and settlement workflows on double-entry accounting',
       'Connected the interface to an AI model pipeline that renders predictive outputs on real-time data, and built reusable geospatial visualization modules',
       'Led code reviews, technical mentoring and deployment management for the team'] },
@@ -129,8 +155,9 @@ export const NODES: PathNode[] = [
 
 /**
  * The time axis is not linear: each knot is [year, distance along the axis]. The quiet years 2018–2022 are
- * squeezed together (shown with a ≈ break), and 2026, the busiest year, gets the most room.
+ * squeezed together (shown with a ≈ break); 2024, with the most engineering stops, gets the most room, then 2026,
+ * the busiest research year.
  */
-export const AXIS: [number, number][] = [[2017.9, 0], [2023, 0.8], [2024, 1.8], [2025, 2.8], [2026, 3.8], [2027.1, 5.5]]
+export const AXIS: [number, number][] = [[2017.9, 0], [2023, 0.6], [2024, 1.35], [2025, 3.0], [2026, 4.2], [2027.1, 5.5]]
 export const AXIS_BREAK = 2021.4
 export const TICKS = [2018, 2023, 2024, 2025, 2026]

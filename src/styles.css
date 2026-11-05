@@ -10,12 +10,19 @@
   --hairline: #d4c49f;
   --sepia: #7a4a22;
   --ochre: #c9a46a;
+  --rubric: #a8321e; /* red ink, as old printers used for initials and marks; 5.1:1 on the sheet */
   --shadow: rgba(60, 40, 10, .45);
-  --vignette: rgba(122, 74, 34, .16);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --display: 'Newsreader', Georgia, serif;
-  --serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
-  --mono: 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+  --edges: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='3' seed='4' result='n'/%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='34' result='g'/%3E%3CfeDisplacementMap in='g' in2='n' scale='110' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Cfilter id='r' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03' numOctaves='3' seed='9' result='n'/%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='5' result='g'/%3E%3CfeDisplacementMap in='g' in2='n' scale='26' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='1000' height='1000' fill='none' stroke='rgb(112, 68, 28)' stroke-opacity='0.3' stroke-width='90' filter='url(%23b)'/%3E%3Crect width='1000' height='1000' fill='none' stroke='rgb(112, 68, 28)' stroke-opacity='0.55' stroke-width='22' filter='url(%23r)'/%3E%3C/svg%3E");
+  --crumple: url("./assets/crumple-light.webp");
+  --scroll-track: #8f6d4c; /* the burnt rim's brown, so the scrollbar reads as part of the edge */
+  --scroll-thumb: var(--paper-deep);
+  /* All three are IM Fell: digitised from the type John Fell gave Oxford in the 1680s, keeping the ink spread and
+     uneven bite of the letterpress. None has a bold; the browser thickens it where <b> asks, which reads as heavier ink */
+  --display: 'IM Fell English', Georgia, serif; /* headings and map labels */
+  --serif: 'IM Fell English', Georgia, 'Times New Roman', serif; /* body: the same cut, rougher than Fell's tidier Pica */
+  --mono: 'IM Fell English SC', Georgia, serif; /* small labels, set in caps like the lettering on an old map */
+  --hand: 'Felipa', 'IM Fell English', Georgia, serif; /* Fig. 1's lettering: a chancery hand, as if inked onto the map by pen */
   color-scheme: light;
 }
 /* Dark: the same sheet read by lamplight. Ochre and sepia are pulled apart in lightness, not just hue,
@@ -31,9 +38,13 @@
   --hairline: #3d3226;
   --sepia: #c4703c;
   --ochre: #e6cb8f;
+  --rubric: #e8604a; /* 4.6:1 on the dark sheet */
   --shadow: rgba(0, 0, 0, .7);
-  --vignette: rgba(0, 0, 0, .45);
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .95 0 0 0 0 .85 0 0 0 0 .65 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --edges: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1000 1000' preserveAspectRatio='none'%3E%3Cfilter id='b' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.008' numOctaves='3' seed='4' result='n'/%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='34' result='g'/%3E%3CfeDisplacementMap in='g' in2='n' scale='110' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Cfilter id='r' x='-20%25' y='-20%25' width='140%25' height='140%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.03' numOctaves='3' seed='9' result='n'/%3E%3CfeGaussianBlur in='SourceGraphic' stdDeviation='5' result='g'/%3E%3CfeDisplacementMap in='g' in2='n' scale='26' xChannelSelector='R' yChannelSelector='G'/%3E%3C/filter%3E%3Crect width='1000' height='1000' fill='none' stroke='rgb(0, 0, 0)' stroke-opacity='0.6' stroke-width='90' filter='url(%23b)'/%3E%3Crect width='1000' height='1000' fill='none' stroke='rgb(0, 0, 0)' stroke-opacity='0.8' stroke-width='22' filter='url(%23r)'/%3E%3C/svg%3E");
+  --crumple: url("./assets/crumple-dark.webp");
+  --scroll-track: #0a0806;
+  --scroll-thumb: #4a3d2e;
   color-scheme: dark;
 }
 * { box-sizing: border-box; }
@@ -41,19 +52,32 @@ html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-behavior: 
 body {
   margin: 0;
   color: var(--ink);
-  font: 17px/1.6 var(--serif);
+  font: 18px/1.6 var(--serif); /* Fell's small x-height needs the extra px */
+  /* ink soaking into the paper: a faint copy of each letter a hair down and right. Unblurred on purpose: a blurred
+     shadow looked the same but made scrolling repaint slower */
+  text-shadow: .35px .3px 0 color-mix(in srgb, currentColor 50%, transparent);
   background-color: var(--paper);
 }
-/* Paper grain + vignette on a fixed layer: `background-attachment: fixed` is ignored or janky on iOS Safari. */
+/* Aged edges, grain and creases on a fixed layer, so the edges stay at the window's edges like a sheet held up to
+   read. The creases live here too, not on body: as a scrolling page background they had to be re-rastered for every
+   strip of a long page and made scrolling stutter (10–15 slow frames per full scroll at 2x, against 1 here).
+   The crease tile is pre-rendered with the paper colour baked in; regenerate it if --paper changes.
+   (A fixed layer rather than `background-attachment: fixed`, which is ignored or janky on iOS Safari.) */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: radial-gradient(ellipse at 50% 40%, transparent 55%, var(--vignette) 100%), var(--grain);
+  background-image: var(--edges), var(--grain), var(--crumple);
+  background-size: 100% 100%, auto, auto;
 }
 img { max-width: 100%; }
+
+/* Scrollbar: Chrome and Firefox use scrollbar-color; Safari still needs the -webkit- rules. */
+html { scrollbar-color: var(--scroll-thumb) var(--scroll-track); }
+::-webkit-scrollbar { width: 12px; background: var(--scroll-track); }
+::-webkit-scrollbar-thumb { background: var(--scroll-thumb); border: 3px solid var(--scroll-track); border-radius: 6px; }
 
 .wrap {
   max-width: 1040px; margin: 0 auto;
@@ -64,7 +88,7 @@ img { max-width: 100%; }
 header.top {
   display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: baseline;
   padding-block: max(20px, env(safe-area-inset-top, 0px)) 20px; border-bottom: 1px solid var(--hairline);
-  font: 500 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft);
+  font: 12px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft);
 }
 header.top nav { display: flex; flex-wrap: wrap; gap: 4px 20px; margin-left: auto; }
 /* 16px icon in a 44px hit area; negative margins cancel the padding so the header's height and gaps are unchanged */
@@ -81,65 +105,205 @@ header.top a:hover { color: var(--sepia); }
 
 /* Every block shares the map's left and right edges; wide screens use columns instead of over-long lines. */
 .title { padding-block: 56px 32px; }
-.eyebrow { font: 500 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px; }
+.eyebrow { font: 12px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 18px; }
 h1 { font: 400 clamp(44px, 8vw, 76px)/1 var(--display); letter-spacing: -.02em; margin: 0 0 20px; text-wrap: balance; }
 h1 em { color: var(--sepia); }
 .abstract { margin: 0; color: var(--ink-soft); font-size: clamp(17px, 1.7vw, 20px); }
-.abstract b { font-variant: small-caps; letter-spacing: .04em; color: var(--ink); font-weight: 600; }
+/* a red initial three lines tall, as at the opening of an old book */
+.abstract::first-letter { float: left; font: 4.1em/.82 var(--display); margin: .05em .08em 0 0; color: var(--rubric); font-variant: normal; letter-spacing: 0; }
+@supports (initial-letter: 3) or (-webkit-initial-letter: 3) {
+  .abstract::first-letter { float: none; font-size: inherit; line-height: inherit; margin: 0 .1em 0 0; -webkit-initial-letter: 3; initial-letter: 3; }
+}
 .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .btn {
   display: inline-flex; align-items: center; min-height: 44px;
-  font: 500 13px/1 var(--mono); letter-spacing: .04em; padding: 12px 18px;
+  font: 13px/1 var(--mono); letter-spacing: .04em; padding: 12px 18px;
   border: 1px solid var(--ink); color: var(--ink); text-decoration: none;
 }
 .btn:hover { border-color: var(--sepia); color: var(--sepia); }
 .btn.solid { background: var(--ink); color: var(--plate); }
 .btn.solid:hover { background: var(--sepia); color: var(--plate); }
+/* the CV link as a red wax seal pressed onto the page; it tilts a little on hover, like it's being lifted */
+.cv-seal { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; color: var(--ink); text-decoration: none; font-style: italic; }
+.cv-seal svg { width: 52px; height: 52px; overflow: visible; transition: transform .25s ease-out; }
+.cv-seal .wax { fill: var(--rubric); }
+.cv-seal .shadow { fill: #1a0d04; opacity: .35; } /* a real shadow is dark in either theme */
+.cv-seal .rim { fill: none; stroke: color-mix(in srgb, var(--rubric) 62%, #2a0a04); stroke-width: .7; } /* the stamp's ring, pressed in like the letters */
+.cv-seal .wax { fill: var(--rubric); }
+:root[data-theme="dark"] .cv-seal .wax { fill: color-mix(in srgb, var(--rubric) 78%, #000); } /* the dark theme's brighter red reads as pink on a blob this big */
+/* the letters are pressed into the wax: darker wax in the hollow, with a light edge where its lower lip catches the light */
+.cv-seal text { font: italic 10.5px var(--display); text-anchor: middle; letter-spacing: -.02em; text-shadow: none; }
+.cv-seal .press { fill: color-mix(in srgb, var(--rubric) 62%, #2a0a04); }
+.cv-seal .lit { fill: color-mix(in srgb, var(--rubric) 55%, #fff); opacity: .7; }
+.cv-seal small { font-size: .8em; color: var(--ink-faint); font-style: normal; }
+.cv-seal:hover { color: var(--sepia); }
+.cv-seal:hover svg { transform: rotate(-8deg) scale(1.06); }
 
+/* ---- Fig. 1 as a parchment scroll (src/scroll.ts) ----
+   A torn parchment sheet lying on the page, its far edge tucked under a paper roll. Textures are pre-rendered
+   images (src/assets): a tileable sheet, and the roll as a torn end, a repeating middle and a torn end. scroll.ts
+   draws only what depends on the sheet's size: the torn outline (clip-path), scorched rim, curl and shadow. */
+.scroll {
+  --roll: 54px;      /* the roll's thickness */
+  --tuck: 46px;      /* how much of the sheet's far edge is under the roll (kept clear of content) */
+  --overhang: 8px;   /* how far the roll sticks out past the sheet */
+  --unroll: 2.6s; --unroll-ease: cubic-bezier(.42, .05, .3, 1);
+  --sheet-age: rgba(120, 75, 30, .22); --sheet-shadow: rgba(55, 35, 12, .42); --rim: #7a4e22; --scorch: #3a230d;
+  position: relative; margin: 14px 0 0;
+}
+:root[data-theme="dark"] .scroll { --sheet-age: rgba(0, 0, 0, .42); --sheet-shadow: rgba(0, 0, 0, .75); --rim: #000; --scorch: #000; }
+/* The window the sheet slides out of. It has 16px of room for the shadow on three sides, but on the far side it
+   stops at the roll's centre (the sheet is under the roll there anyway), so while unrolling its edge always
+   trails the roll's centre and stays hidden behind it. The sheet inside is widened back to full size. */
+.scroll-reveal { --far: calc(var(--roll) / 2 - var(--overhang)); margin: -16px var(--far) -16px -16px; padding: 16px 0 16px 16px; overflow: hidden; }
+.scroll-inner { position: relative; margin-right: calc(-1 * var(--far)); }
+.sheet-shadow { position: absolute; left: -24px; top: -24px; pointer-events: none; }
+.sheet-shadow path { fill: var(--sheet-shadow); }
 figure.plate {
-  margin: 8px 0 0; background: var(--plate); border: 1px solid var(--hairline);
-  box-shadow: 0 1px 0 var(--paper-deep), 0 18px 40px -28px var(--shadow);
+  --plate: #f0e0bd; /* parchment; map labels are haloed in this colour too */
+  position: relative; z-index: 1; margin: 0; padding-right: var(--tuck);
+  background: radial-gradient(ellipse at 50% 45%, transparent 40%, var(--sheet-age) 100%), url("./assets/sheet-light.webp") var(--plate);
+}
+:root[data-theme="dark"] figure.plate { --plate: #2c2219; background-image: radial-gradient(ellipse at 50% 45%, transparent 40%, var(--sheet-age) 100%), url("./assets/sheet-dark.webp"); }
+/* the scorched rim follows the torn outline: stacked strokes fading inward, then a burnt edge */
+.sheet-surface { position: absolute; left: 0; top: 0; z-index: 2; pointer-events: none; }
+.sheet-surface .rim, .sheet-surface .scorch { fill: none; }
+.sheet-surface .rim { stroke: var(--rim); }
+.rim-0 { opacity: .06; } .rim-1 { opacity: .08; } .rim-2 { opacity: .12; } .rim-3 { opacity: .16; }
+:root[data-theme="dark"] :is(.rim-0, .rim-1, .rim-2, .rim-3) { opacity: .16; }
+.sheet-surface .scorch { stroke: var(--scorch); opacity: .6; }
+/* the sheet curling up into the roll: catches the light, then falls into shadow */
+.curl-0 { stop-color: #fff; stop-opacity: 0; }
+.curl-light { stop-color: #fff; stop-opacity: .22; }
+.curl-mid { stop-color: #2a1a0a; stop-opacity: .12; }
+.curl-dark { stop-color: #2a1a0a; stop-opacity: .4; }
+:root[data-theme="dark"] .curl-light { stop-color: #c9a77a; stop-opacity: .07; }
+:root[data-theme="dark"] .curl-mid { stop-opacity: .25; }
+:root[data-theme="dark"] .curl-dark { stop-opacity: .55; }
+/* the roll: torn ends (::before, ::after) over a middle that repeats a whole number of times (round), so its
+   wavy sides always meet the ends cleanly; the ends fade into the middle over their inner 16px */
+.roll {
+  position: absolute; z-index: 3; top: -11px; bottom: -7px; right: calc(-1 * var(--overhang)); width: var(--roll);
+  padding: 54px 0 44px; pointer-events: none;
+  background: url("./assets/roll-mid-light.webp") 0 0 / 100% auto no-repeat round content-box;
+  filter: drop-shadow(5px 7px 6px rgba(40, 25, 10, .38));
+}
+.roll::before, .roll::after { content: ''; position: absolute; left: 0; width: 100%; background: 0 0 / 100% 100% no-repeat; }
+.roll::before { top: 0; height: 70px; background-image: url("./assets/roll-top-light.webp"); }
+.roll::after { bottom: 0; height: 60px; background-image: url("./assets/roll-bottom-light.webp"); }
+:root[data-theme="dark"] .roll { background-image: url("./assets/roll-mid-dark.webp"); filter: drop-shadow(5px 7px 7px rgba(0, 0, 0, .65)); }
+:root[data-theme="dark"] .roll::before { background-image: url("./assets/roll-top-dark.webp"); }
+:root[data-theme="dark"] .roll::after { background-image: url("./assets/roll-bottom-dark.webp"); }
+/* Unrolling. Rolled up, the window has slid away to the near side (the sheet itself is counter-shifted so it
+   stays put) and the roll sits at the near edge, thick with the whole sheet wound on. .unrolling plays all three
+   back to rest together; .open is the plain final state. Only transforms move, so the GPU runs it. */
+.can-unroll .scroll:not(.open) .scroll-reveal { transform: translateX(-100%); }
+.can-unroll .scroll:not(.open) .scroll-inner { transform: translateX(calc(100% + 16px - var(--far))); }
+.can-unroll .scroll:not(.open):not(.unrolling) .roll { right: auto; left: calc(var(--roll) / -2); transform: scaleX(1.6); }
+.scroll.unrolling .scroll-reveal { animation: unroll-window var(--unroll) var(--unroll-ease) both; }
+.scroll.unrolling .scroll-inner { animation: unroll-sheet var(--unroll) var(--unroll-ease) both; }
+.scroll.unrolling .roll { animation: unroll-roll var(--unroll) var(--unroll-ease) both; }
+@keyframes unroll-window { from { transform: translateX(-100%); } to { transform: none; } }
+@keyframes unroll-sheet { from { transform: translateX(calc(100% + 16px - var(--far))); } to { transform: none; } }
+@keyframes unroll-roll { from { transform: translateX(calc(-1 * var(--travel))) scaleX(1.6); } to { transform: none; } }
+@keyframes unroll-window-v { from { transform: translateY(-100%); } to { transform: none; } }
+@keyframes unroll-sheet-v { from { transform: translateY(calc(100% + 16px - var(--far))); } to { transform: none; } }
+@keyframes unroll-roll-v { from { transform: translateY(calc(-1 * var(--travel))) scaleY(1.6); } to { transform: none; } }
+/* Phones (keep in sync with VERTICAL_QUERY): the map runs downward, so the roll lies along the bottom */
+@media (max-width: 760px) {
+  .scroll { --unroll: 3s; }
+  figure.plate { padding-right: 0; padding-bottom: var(--tuck); }
+  .scroll-reveal { margin: -16px -16px var(--far) -16px; padding: 16px 16px 0 16px; }
+  .scroll-inner { margin-right: 0; margin-bottom: calc(-1 * var(--far)); }
+  .roll { top: auto; bottom: calc(-1 * var(--overhang)); left: -6px; right: -6px; width: auto; height: var(--roll); padding: 0 54px 0 44px;
+    background-image: url("./assets/roll-h-mid-light.webp"); background-size: auto 100%; background-repeat: round no-repeat; }
+  .roll::before { top: 0; left: auto; right: 0; width: 70px; height: 100%; background-image: url("./assets/roll-h-top-light.webp"); }
+  .roll::after { bottom: 0; left: 0; width: 60px; height: 100%; background-image: url("./assets/roll-h-bottom-light.webp"); }
+  :root[data-theme="dark"] .roll { background-image: url("./assets/roll-h-mid-dark.webp"); }
+  :root[data-theme="dark"] .roll::before { background-image: url("./assets/roll-h-top-dark.webp"); }
+  :root[data-theme="dark"] .roll::after { background-image: url("./assets/roll-h-bottom-dark.webp"); }
+  .can-unroll .scroll:not(.open) .scroll-reveal { transform: translateY(-100%); }
+  .can-unroll .scroll:not(.open) .scroll-inner { transform: translateY(calc(100% + 16px - var(--far))); }
+  .can-unroll .scroll:not(.open):not(.unrolling) .roll { left: -6px; right: -6px; bottom: auto; top: calc(var(--roll) / -2); transform: scaleY(1.6); }
+  .scroll.unrolling .scroll-reveal { animation-name: unroll-window-v; }
+  .scroll.unrolling .scroll-inner { animation-name: unroll-sheet-v; }
+  .scroll.unrolling .roll { animation-name: unroll-roll-v; }
 }
 .plate-head {
   display: flex; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap;
   padding: 12px 16px; border-bottom: 1px solid var(--hairline);
-  font: 500 11px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
+  font: 11px/1.2 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
 }
+.plate-head > span:first-child { align-self: center; padding: 3px 12px; font: italic 15px var(--display); letter-spacing: .04em;
+  text-transform: none; color: var(--ink); border: 1px solid var(--ink-soft); outline: 1px solid var(--ink-soft); outline-offset: 2px; }
 .legend { display: flex; flex-wrap: wrap; gap: 6px 16px; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend svg { width: 14px; height: 14px; }
 .legend svg.line { width: 24px; }
 .plate-body { display: grid; grid-template-columns: minmax(0, 1fr); }
-#map { display: block; width: 100%; height: 420px; user-select: none; -webkit-user-select: none; }
+/* the 8px margins keep edge labels (years, "today") clear of the sheet's torn edge */
+/* everything written on the map is in the hand; capitals don't suit a pen script, so names keep their own case */
+#map { --display: var(--hand); --mono: var(--hand); }
+#map :is(.track-name, .span.role text) { text-transform: none; letter-spacing: .04em; }
+/* the hand runs small for its size, so the map's lettering is set larger than the print around it */
+#map .node text, #map .span.edu text { font-size: 16.5px; }
+#map .node.sel text { font-size: 18.5px; }
+/* minor stops: smaller, softer labels; one with no room for its label shows it only on hover, focus or selection */
+#map .node.minor text { font-size: 14.5px; fill: var(--ink-soft); }
+#map .node.minor.sel text { font-size: 16.5px; fill: var(--sepia); }
+.node.quiet text { opacity: 0; }
+.node.quiet:is(:hover, :focus-visible, .sel) text { opacity: 1; }
+#map .track-name { font-size: 14.5px; }
+#map :is(.span.role text, .track .note, .today text, .scale-cap, .tick text) { font-size: 14px; }
+#map :is(.incognita, .scale-year) { font-size: 15px; }
+#map { text-shadow: none; /* labels carry a paper-coloured halo the shadow would smudge */ display: block; width: calc(100% - 16px); margin: 0 8px; height: 450px; user-select: none; -webkit-user-select: none; }
 aside.detail { border-top: 1px solid var(--hairline); box-shadow: inset 4px 0 0 var(--sepia); padding: 22px 24px 24px 28px; min-width: 0; scroll-margin-bottom: 16px; }
 aside.detail p.hint { margin: 0; font-style: italic; color: var(--ink-faint); }
-aside.detail .k { font: 500 11px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 10px; }
-aside.detail h3 { font: 600 24px/1.15 var(--display); margin: 0 0 10px; text-wrap: balance; }
+aside.detail .k { font: 11px/1.3 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 10px; }
+aside.detail h3 { font: 24px/1.15 var(--display); margin: 0 0 10px; text-wrap: balance; }
 aside.detail p { margin: 0 0 14px; font-size: 16px; color: var(--ink); }
-aside.detail ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; color: var(--ink-soft); }
-aside.detail ul.pts li { padding-left: 1.3em; position: relative; }
-aside.detail ul.pts li::before { content: '✦'; position: absolute; left: 0; color: var(--sepia); font-size: 12px; top: .2em; }
+:is(aside.detail, .work) ul.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; color: var(--ink-soft); }
+:is(aside.detail, .work) ul.pts li { padding-left: 1.3em; position: relative; }
+:is(aside.detail, .work) ul.pts li::before { content: '✦'; position: absolute; left: 0; color: var(--sepia); font-size: 12px; top: .2em; }
 figcaption { padding: 12px 16px; border-top: 1px solid var(--hairline); font-size: 14px; color: var(--ink-soft); }
-figcaption b { font-family: var(--display); font-style: italic; font-weight: 600; color: var(--ink); }
+figcaption b { font-family: var(--display); font-style: italic; color: var(--ink); }
 
 /* ---- Fig. 1: the path map ---- */
 .tick line { stroke: var(--hairline); stroke-dasharray: 2 4; }
-.tick text { font: 11px var(--mono); fill: var(--ink-faint); }
-.tick.break text { font: 16px var(--display); fill: var(--ink-soft); }
+.tick text { font: 12.5px var(--mono); fill: var(--ink-faint); }
+text.tick.break { font: 16px var(--display); fill: var(--ink-soft); }
+/* wide screens: an old map's scale bar instead of year labels, a compass rose, and a "today" line */
+.scale .seg.dark { fill: var(--ink-soft); } .scale .seg.light { fill: var(--plate); }
+.scale .seg-frame { fill: none; stroke: var(--ink-soft); stroke-width: 1; }
+.scale-year { font: 13px var(--mono); fill: var(--ink-faint); }
+.scale-cap { font: italic 13px var(--display); fill: var(--ink-soft); }
+.compass { opacity: .75; pointer-events: none; }
+.compass .frame { fill: none; stroke: var(--ink-soft); stroke-width: 1.2; } .compass .frame.thin { stroke-width: .6; }
+.compass .ring { fill: none; stroke: var(--ink-soft); stroke-width: 1; } .compass .ring.thin { stroke-width: .6; stroke-dasharray: 1 2; }
+.compass .pt.dark { fill: var(--sepia); } .compass .pt.light { fill: var(--plate); stroke: var(--sepia); stroke-width: .7; }
+.compass-n { font: italic 12px var(--display); fill: var(--ink-soft); }
+.today line { stroke: var(--rubric); stroke-width: 1; stroke-dasharray: 2 3; opacity: .7; }
+.today text { font: italic 12px var(--display); fill: var(--rubric); }
+/* the road past today, named the way old maps marked what nobody had surveyed yet */
+.incognita { font: italic 13px var(--display); letter-spacing: .14em; fill: var(--ink-faint); opacity: .8; paint-order: stroke; stroke: var(--plate); stroke-width: 4px; stroke-linejoin: round; }
+/* rhumb lines fanning out from the compass, like a sea chart's: the eight main winds in red, the rest in ink */
+.rhumbs line { stroke: var(--ink-faint); stroke-width: .6; opacity: .28; }
+.rhumbs line.wind { stroke: var(--rubric); opacity: .3; }
 
-/* tracks: ochre for engineering, sepia for research */
+/* tracks: footprints walked up to today, then a dashed road ahead; sepia (darker) for engineering, ochre for research */
 .track { transition: opacity .2s; }
-.track .rail { fill: none; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
-.track.eng .rail { stroke: var(--ochre); }
-.track.research .rail { stroke: var(--sepia); }
+.track .rail { fill: none; stroke: none; } /* geometry only: the trail is drawn by .prints and .ahead */
+.track.eng .prints { fill: var(--sepia); } .track.research .prints { fill: var(--ochre); }
+.track .ahead { fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-dasharray: 9 6; }
+.track.eng .ahead { stroke: var(--sepia); } .track.research .ahead { stroke: var(--ochre); }
 /* where a path starts: a small solid square, so it can't be mistaken for a project station */
 .track .cap { stroke: none; }
-.track.eng .cap { fill: var(--ochre); }
-.track.research .cap { fill: var(--sepia); }
-.track.eng .arrow { fill: var(--ochre); }
-.track.research .arrow { fill: var(--sepia); }
+.track.eng .cap { fill: var(--sepia); }
+.track.research .cap { fill: var(--ochre); }
+.track.eng .arrow { fill: var(--sepia); }
+.track.research .arrow { fill: var(--ochre); }
 .track .note { font: italic 13px var(--display); fill: var(--ink-soft); }
-.track-name { font: 500 10.5px var(--mono); letter-spacing: .1em; text-transform: uppercase; fill: var(--ink-faint); }
+.track-name { font: italic 11px var(--display); letter-spacing: .22em; text-transform: uppercase; fill: var(--ink-soft); } /* like a territory on a map */
 svg.focus .track.dim { opacity: .18; }
 
 /* spans: the degree is the education track itself (a double rail); roles are brackets under engineering */
@@ -149,11 +313,11 @@ svg.focus .track.dim { opacity: .18; }
 .span.edu .main { stroke: var(--ink); stroke-width: 8; }
 .span.edu .inner { stroke: var(--plate); stroke-width: 3; }
 .span.edu .cap { fill: var(--plate); stroke: var(--ink); stroke-width: 2.5; transition: stroke .2s; }
-.span.edu text { font: 600 14px var(--display); fill: var(--ink); paint-order: stroke; stroke: var(--plate); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
+.span.edu text { font: 14px var(--display); fill: var(--ink); paint-order: stroke; stroke: var(--plate); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; }
 .span.role .main { stroke: var(--ink-soft); stroke-width: 1.5; }
 .span.role .inner { display: none; }
 .span.role .arrow { fill: var(--ink-soft); }
-.span.role text { font: 500 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-soft);
+.span.role text { font: 10.5px var(--mono); letter-spacing: .08em; text-transform: uppercase; fill: var(--ink-soft);
   paint-order: stroke; stroke: var(--plate); stroke-width: 6px; stroke-linejoin: round; pointer-events: none; }
 .span.edu rect.cap { fill: var(--ink); stroke: none; transition: fill .2s; }
 .span:hover .main, .span:hover .cap { stroke: var(--sepia); }
@@ -161,52 +325,33 @@ svg.focus .track.dim { opacity: .18; }
 .span:hover rect.cap, .span.sel rect.cap { fill: var(--sepia); }
 .span.role.sel .main { stroke-width: 2.5; }
 .span.sel .arrow { fill: var(--sepia); }
-.span.sel text { fill: var(--sepia); font-weight: 600; }
+.span.sel text { fill: var(--sepia); }
 svg.focus .span.dim { opacity: .22; }
 
-/* stations */
+/* stations: town marks (ring + dot); the selected one becomes a wax seal */
 .node { cursor: pointer; outline: none; -webkit-tap-highlight-color: transparent; }
-.node circle { stroke: var(--ink); stroke-width: 1.5; transition: opacity .2s; }
-.node.work circle.dot { fill: var(--plate); stroke: var(--ochre); stroke-width: 3.5; }
-.node.research circle.dot { fill: var(--plate); stroke: var(--sepia); stroke-width: 3.5; }
-.node text { font-family: var(--display); font-size: 14px; fill: var(--ink); paint-order: stroke; stroke: var(--plate); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; transition: opacity .2s, transform .2s; }
+.node circle { transition: opacity .2s; }
 .node circle.hit { fill: transparent; stroke: none; }
-.node circle.dot { transform-box: fill-box; transform-origin: center; transition: transform .2s, opacity .2s; }
+.node circle.dot { fill: var(--plate); stroke-width: 2.2; transform-box: fill-box; transform-origin: center; transition: transform .2s, opacity .2s; }
+.node.work circle.dot { stroke: var(--sepia); } .node.research circle.dot { stroke: var(--ochre); }
+.node .town { stroke: none; pointer-events: none; }
+.node.work .town { fill: var(--sepia); } .node.research .town { fill: var(--ochre); }
 .node:hover circle.dot { transform: scale(1.2); }
-/* Selected station: filled, enlarged dot, pulsing halo, slowly turning dashed ring, sepia label. */
-.node circle.halo { fill: none; stroke: var(--sepia); stroke-width: 6; stroke-opacity: 0; transition: stroke-opacity .2s; pointer-events: none;
-  transform-box: fill-box; transform-origin: center; }
-.node circle.ring { fill: none; stroke: var(--sepia); stroke-width: 1.5; stroke-dasharray: 3 4; opacity: 0; pointer-events: none;
-  transform-box: fill-box; transform-origin: center; transition: opacity .25s; }
-.node.sel circle.dot { transform: scale(1.5); stroke: var(--ink); stroke-width: 2.5; }
-.node.sel.work circle.dot { fill: var(--ochre); }
-.node.sel.research circle.dot { fill: var(--sepia); }
-.node.sel .halo { stroke-opacity: .35; animation: halo-pulse 2.4s ease-in-out infinite; }
-.node.sel circle.ring { opacity: 1; animation: ring-turn 18s linear infinite; }
-.node.sel text { fill: var(--sepia); font-weight: 600; font-size: 16px; stroke-width: 5px; }
-/* move the selected label clear of the ring, away from the dot */
+.node text { font-family: var(--display); font-size: 14px; fill: var(--ink); paint-order: stroke; stroke: var(--plate); stroke-width: 4px; stroke-linejoin: round; pointer-events: none; transition: opacity .2s, transform .2s; }
+.seal { display: none; pointer-events: none; }
+.node.sel .seal { display: inline; }
+.node.sel circle.dot, .node.sel .town { display: none; }
+.seal-shadow { fill: var(--ink); opacity: .3; }
+.node.work .seal-wax { fill: var(--sepia); } .node.research .seal-wax { fill: var(--ochre); }
+.seal-rim { fill: none; stroke: var(--ink); stroke-width: 1.4; opacity: .25; }
+.seal-mark { fill: var(--plate); opacity: .8; }
+.node.sel text { fill: var(--sepia); font-size: 16px; stroke-width: 5px; }
+/* move the selected label clear of the seal, away from it */
 .node.sel.below text { transform: translateY(6px); }
 .node.sel.above text { transform: translateY(-6px); }
 .node.sel.left text { transform: translateX(-6px); }
 .node.sel.right text { transform: translateX(6px); }
-/* transform and opacity only, so the GPU runs it: pulsing stroke-opacity cost ~8% of the main thread, forever */
-@keyframes halo-pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.18); opacity: .35; } }
-@keyframes ring-turn { to { transform: rotate(360deg); } }
-svg.focus .node.dim circle.dot, svg.focus .node.dim text { opacity: .2; }
-
-/* Draw-in: map.ts adds .intro, then swaps it for .play once the map is in view; --d and --t (delay, duration)
-   come from each item's years. With pathLength=1 a single dash is the whole line, so sliding its offset
-   from 1 to 0 draws the line in. `backwards` holds the hidden state during each delay. */
-.rail, .span .main, .span .inner { stroke-dasharray: 1; }
-#map.intro :is(.rail, .span .main, .span .inner) { stroke-dashoffset: 1; }
-#map.intro :is(.node, .track .cap, .track .arrow, .track .note, .span .cap, .span .arrow, .span text) { opacity: 0; }
-#map.play :is(.rail, .span .main, .span .inner) { animation: draw var(--t) linear var(--d) backwards; }
-#map.play :is(.node, .track .cap, .track .note, .span .cap, .span text) { animation: appear .4s ease-out var(--d) backwards; }
-#map.play :is(.track .arrow, .span .arrow, .span .cap ~ .cap) { animation: appear .4s ease-out calc(var(--d) + var(--t)) backwards; }
-#map.play .node circle.dot { animation: grow .45s cubic-bezier(.3, 1.6, .6, 1) var(--d) backwards; }
-@keyframes draw { from { stroke-dashoffset: 1; } }
-@keyframes appear { from { opacity: 0; } }
-@keyframes grow { from { transform: scale(0); } }
+svg.focus .node.dim :is(circle.dot, .town, .seal, text) { opacity: .2; }
 
 /* Sections below the fold fade up the first time they scroll into view (main.ts adds .reveal, then .shown). */
 /* the transition lives on .shown only, so hiding is instant and only the fade-in animates */
@@ -219,9 +364,23 @@ svg.focus .node.dim circle.dot, svg.focus .node.dim text { opacity: .2; }
 @keyframes icon-turn { from { transform: rotate(-90deg) scale(.5); opacity: 0; } }
 
 section.sec { padding-top: 56px; scroll-margin-top: 8px; }
+/* a printer's ornament between sections: tapered rules either side of a lozenge, in red ink (a mask, so it follows the theme) */
+section.sec::before {
+  content: ''; display: block; width: min(220px, 60%); height: 20px; margin: 0 auto 44px; background: var(--rubric); opacity: .85;
+  -webkit-mask: var(--fleuron) center / contain no-repeat; mask: var(--fleuron) center / contain no-repeat;
+  --fleuron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20'%3E%3Cpath d='M4 10 84 8.6v2.8zM196 10l-80-1.4v2.8zM100 2.5l5.5 7.5-5.5 7.5-5.5-7.5zM91 7l3 3-3 3-3-3zM109 7l3 3-3 3-3-3z'/%3E%3Ccircle cx='86.5' cy='10' r='1.4'/%3E%3Ccircle cx='113.5' cy='10' r='1.4'/%3E%3C/svg%3E");
+}
 section.sec.sec-wide { max-width: none; }
 section.sec h2 { font: 400 32px/1.1 var(--display); margin: 0 0 16px; }
-section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margin-right: 10px; vertical-align: middle; }
+/* selected work: one entry per project, in the same voice as the map's detail panel */
+.work { display: grid; gap: 40px; }
+.work article { display: grid; gap: 10px; align-content: start; }
+.work h3 { font: 26px/1.15 var(--display); margin: 0; }
+.work h3 span { font-style: italic; font-size: .7em; color: var(--ink-soft); margin-left: .3em; }
+.work p { margin: 0; }
+.work .when { font: 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+.work .stack { font-size: 15px; font-style: italic; color: var(--ink-faint); }
+.lead { margin: 0 0 20px; color: var(--ink-soft); }
 .pubs { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
 .pubs li { padding-left: 1.4em; text-indent: -1.4em; overflow-wrap: anywhere; }
 .pubs .venue { font-style: italic; }
@@ -231,7 +390,7 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
 .index > div { display: grid; grid-template-columns: var(--label) minmax(0, 1fr); align-items: baseline; }
 .index dt {
   display: flex; align-items: baseline; gap: 10px; padding-right: 14px;
-  font: 500 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
+  font: 13px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint);
 }
 .index dt::after { content: ''; flex: 1; min-width: 16px; border-bottom: 1px dotted var(--ochre); transform: translateY(-3px); }
 .index dd { margin: 0; }
@@ -240,7 +399,7 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
 /* the trailing space gives lines a place to wrap (the <li>s have no whitespace between them); the dot stays at the line end */
 .index li + li::before { content: '\00b7\0020'; color: var(--sepia); font-weight: 600; margin-left: .45em; word-spacing: .2em; }
 .plain p { margin: 0; }
-.plain b { font-family: var(--display); font-weight: 600; }
+.plain b { font-family: var(--display); }
 .plain { display: grid; gap: 12px; }
 #contact p { overflow-wrap: anywhere; }
 .note { font: 12px/1.5 var(--mono); color: var(--ink-faint); margin-top: 48px; border-top: 1px solid var(--hairline); padding-top: 14px; }
@@ -254,6 +413,7 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
   body { font-size: 16px; }
   .title { padding-block: 40px 24px; }
   section.sec { padding-top: 44px; }
+  section.sec::before { margin-bottom: 36px; }
   section.sec h2 { font-size: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -264,6 +424,7 @@ section.sec h2 span { font: 500 14px var(--mono); color: var(--ink-faint); margi
 /* Wide screens: split content into columns so it spans the full width without long lines. */
 @media (min-width: 900px) {
   #languages .plain { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+  .work { grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 48px; }
   aside.detail { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: 40px; align-items: start; }
   aside.detail > :not(ul) { grid-column: 1; }
   aside.detail ul.pts { grid-column: 2; grid-row: 1 / span 3; }
