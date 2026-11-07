@@ -1,49 +1,35 @@
-# Hi, I'm Nishat Tafannum 👋
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:2b4c7e,100:6b8fc7&height=170&section=header&text=Nishat%20Tafannum&fontSize=42&fontColor=ffffff&fontAlignY=36&desc=Front-End%20Engineer%20%C2%B7%20Software%20Engineer%20L-2%20%40%20Vivasoft&descSize=16&descAlignY=58" alt="Nishat Tafannum, Front-End Engineer">
+</p>
 
-**Front-End Engineer (Software Engineer L-2) at Vivasoft Limited** · Dhaka, Bangladesh
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=18&duration=3000&pause=800&color=2B4C7E&center=true&vCenter=true&width=520&lines=React+%C2%B7+Next.js+%C2%B7+TypeScript;Design+systems+%26+component+libraries;AdTech+%C2%B7+FinTech+%C2%B7+B2B+SaaS;Researching+Bangla+NLP" alt="React · Next.js · TypeScript">
+</p>
 
-I build responsive, high-performance web applications with **React, Next.js and TypeScript**, and have done so for 3+ years for AdTech, FinTech and B2B SaaS clients. I lead design systems and shared component libraries used across multiple platforms, with automated quality checks and an AI-assisted delivery workflow. I work directly with international clients and teams in fully remote settings. Alongside engineering, I research how language models handle Bangla.
+<p align="center">
+  <a href="https://sejuty.github.io/sejuty/"><img src="https://img.shields.io/badge/Portfolio-2b4c7e?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Portfolio"></a>
+  <a href="https://sejuty.github.io/sejuty/cv.pdf"><img src="https://img.shields.io/badge/Résumé-6b8fc7?style=for-the-badge&logo=readthedocs&logoColor=white" alt="Résumé"></a>
+  <a href="https://linkedin.com/in/nishat-tafannum"><img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="mailto:sejuty87@gmail.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
+</p>
 
-🌐 [Portfolio](https://sejuty.github.io/sejuty/) · 📄 [Résumé](https://sejuty.github.io/sejuty/cv.pdf) · 💼 [LinkedIn](https://linkedin.com/in/nishat-tafannum) · ✉️ [sejuty87@gmail.com](mailto:sejuty87@gmail.com)
+I build fast, accessible web apps for international AdTech and FinTech teams, and lead the design systems and shared component libraries behind them. 3+ years, fully remote, based in Dhaka 🇧🇩.
 
----
+### 🛠️ Tech I work with
 
-## 🛠️ Tech stack
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=react,nextjs,ts,js,html,css,tailwind,sass,redux,vite,bun,webpack,laravel,docker,git,gitlab&perline=8" alt="React, Next.js, TypeScript, JavaScript, HTML, CSS, Tailwind, Sass, Redux, Vite, Bun, Webpack, Laravel, Docker, Git, GitLab">
+</p>
 
-| | |
-|---|---|
-| **Languages** | JavaScript (ES6+), TypeScript, HTML5, CSS3, PHP (Laravel) |
-| **Frontend** | React.js, Next.js, Tailwind CSS, Sass, Ant Design, shadcn/ui |
-| **State & data** | Redux Toolkit, RTK Query, React Query |
-| **Charts** | ApexCharts, Highcharts |
-| **Forms & validation** | Zod, Formik, JSON Schema (Ajv) |
-| **Build & release** | Vite, Bun, Webpack, tsup, GitLab CI, private npm registry |
-| **Quality** | ESLint, Biome, WCAG AA accessibility |
-| **Architecture** | Design systems, component libraries, micro-frontends, RBAC |
-| **Auth** | NextAuth.js, Keycloak |
-| **Tools** | Git, Docker, Claude Code |
+### ✨ Highlights
 
-## 💼 Experience
+- ⚡ Cut build time by **75%** by moving the Improve Digital Console (Azerion) from Webpack to Vite and Bun
+- 🧩 Lead a shared UI library used by **3 ad tech platforms**, built from **49** reusable React pieces
+- 🎨 Design tokens with automated **WCAG AA** contrast tests
+- 💰 Frontend architecture for **NetCapital**, Azerion's invoice-financing platform
+- 📦 Published **[VivaKits](https://www.npmjs.com/package/vivakit)**, an accessible React component library on npm
 
-**Vivasoft Limited**, Dhaka (remote client delivery for international teams)
-
-- **Software Engineer L-2** · Mar 2026 – Present. Promoted from L-1 after two years. I lead the front-end modernization of Azerion's Improve Digital ad tech platforms and the shared component libraries, design systems and build-tool migrations across client projects. I also review code and mentor junior developers.
-- **Software Engineer L-1** · Mar 2024 – Feb 2026. Delivered React, Next.js and TypeScript apps for AdTech and FinTech clients, including RBAC, multi-step workflows and interactive data visualizations. Improved component rendering performance by 25%, and led a front-end team of 2 junior developers on NetCapital.
-- **Associate Software Engineer** · Feb 2023 – Jul 2023. Built about 60% of a platform's shared React component library.
-
-## 🚀 Selected projects
-
-- **Improve Digital: Console, Publisher & Marketplace** (Azerion). Migrated Webpack to Vite and npm/Yarn to Bun, cutting build time by **75%**. Authored **49 shared React building blocks**, including a data table that replaced jQuery DataTables in 15+ modules. Built self-enforcing design tokens with automated WCAG AA contrast tests. Started and still lead a shared UI library (Bun monorepo, tsup, private npm) used by 3 platforms.
-- **NetCapital** (Azerion's invoice-financing platform). Frontend architecture for a multi-tenant financial operations platform built with Next.js 15, RTK Query, Highcharts and Keycloak. It covers financing order lifecycles, approvals, settlement and double-entry accounting.
-- **PiHR** (HR & payroll SaaS). Integrated 60+ reports with a micro-frontend architecture. Added multilingual English, Bangla and Arabic support, including right-to-left layouts.
-- **[VivaKits](https://www.npmjs.com/package/vivakit)** (React component library on npm). Accessible Input, Select, OTP, Skeleton and Switch components, with full API docs.
-- **Klikit** (restaurant & food delivery management). Built the Menu v2 time-slot scheduling feature, and service workers for cross-device performance.
-
-## 🎓 Education
-
-**B.Sc. in Software Engineering**, Shahjalal University of Science and Technology · 2019 – 2024
-
----
+🎓 B.Sc. in Software Engineering, SUST (2019 – 2024)
 
 <details>
 <summary><b>About this repo</b>: source for my portfolio site</summary>
@@ -65,3 +51,5 @@ npm run cv        # rebuild public/cv.pdf from resume/cv.html
 - Every push to `main` deploys through `.github/workflows/deploy.yml` (Pages source: GitHub Actions)
 
 </details>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:6b8fc7,100:2b4c7e&height=90&section=footer" width="100%" alt="">
