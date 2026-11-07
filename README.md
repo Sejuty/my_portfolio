@@ -20,11 +20,4 @@ npm run preview   # serve dist/ locally
 
 ## Deploy (GitHub Pages)
 
-The site lives in the `Sejuty/my_portfolio` repo and is served at https://sejuty.github.io/my_portfolio/.
-
-1. The repo must be **public** (GitHub Pages on a private repo needs a paid plan).
-2. Repo **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Every push to `main` runs `.github/workflows/deploy.yml` and publishes the site.
-
-`vite.config.ts` sets `base: '/my_portfolio/'` to match the repo name. If you rename the repo, update it; if you
-move the site to a repo named `Sejuty.github.io` (served at https://sejuty.github.io/), set it to `'/'`.
+The site lives in the `Sejuty/sejuty` repo and is served at https://sejuty.github.io/sejuty/.
